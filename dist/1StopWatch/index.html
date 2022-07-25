@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+  <title>Stopwatch</title>
+</head>
+<body>
+  <div class="container">
+    <div class="time">
+      00:00:00
+    </div>
+    <div class="options">
+      <button class="start">Start</button>
+      <button class="stop">Stop</button>
+      <button class="reset">Reset</button>
+    </div>
+  </div>
+  <script>
+
+    var ms = 0, s = 0, m = 0
+    var time = document.querySelector('.time')
+    var start = document.querySelector('.start')
+    var stop = document.querySelector('.stop')
+    var reset = document.querySelector('.reset')
+    var counter
+    
+
+      start.addEventListener('click', function(){
+        if (!counter){
+            counter = setInterval(run, 10)
+        }
+        
+        function run() {
+          time.textContent = zeroTime()
+          ms++
+          if (ms==100){
+            ms=0
+            s++
+          }
+          if (s==60){
+            s=0
+            m++
+          }
+        }
+      })
+
+      stop.addEventListener('click', function () { 
+     clearInterval(counter)
+     counter = false
+        
+      })
+
+      reset.addEventListener('click', function () { 
+        if (!counter){
+          ms = 0
+          s = 0
+          m = 0
+          time.textContent = zeroTime()
+        }
+        
+      })
+      function zeroTime(){
+        return m + ":" + s + ":" + ms
+      }
+ 
+  </script>
+</body>
+</html>
